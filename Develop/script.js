@@ -1,5 +1,109 @@
+let container;
+let time;
+let text;
+let button;
+let icon;
+let mainDiv = document.getElementById("mainDiv");
+
+// display current day on page
 let currentDay = document.getElementById("currentDay");
 currentDay.innerHTML = dayjs().format("dddd, MMM DD");
+
+// compares current time to time on time block
+let currentTime = dayjs().format("HH:00");
+console.log(currentTime);
+// let hour = Array.from(document.getElementsByClassName("hours"));
+// console.log(hour[0].id);
+
+let hour = [
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+];
+
+for (i = 0; i < hour.length; i++) {
+  if (hour[i] == currentTime) {
+    container = document.createElement("div");
+    container.setAttribute("class", "row time-block present");
+    mainDiv.appendChild(container);
+
+    time = document.createElement("div");
+    time.setAttribute("class", "col-2 col-md-1 hour text-center py-3");
+    time.innerHTML = hour[i];
+    container.appendChild(time);
+
+    text = document.createElement("textarea");
+    text.setAttribute("class", "col-8 col-md-10 description");
+    text.rows = "3";
+    container.appendChild(text);
+
+    button = document.createElement("button");
+    button.setAttribute("class", "btn saveBtn col-2 col-md-1");
+    button.ariaLabel = "save";
+    container.appendChild(button);
+
+    icon = document.createElement("i");
+    icon.setAttribute("class", "fas fa-save");
+    icon.ariaHidden = "true";
+    button.appendChild(icon);
+  } else if (hour[i] < currentTime) {
+    console.log(hour[i]);
+    container = document.createElement("div");
+    container.setAttribute("class", "row time-block past");
+    mainDiv.appendChild(container);
+
+    time = document.createElement("div");
+    time.setAttribute("class", "col-2 col-md-1 hour text-center py-3");
+    time.innerHTML = hour[i];
+    container.appendChild(time);
+
+    text = document.createElement("textarea");
+    text.setAttribute("class", "col-8 col-md-10 description");
+    text.rows = "3";
+    container.appendChild(text);
+
+    button = document.createElement("button");
+    button.setAttribute("class", "btn saveBtn col-2 col-md-1");
+    button.ariaLabel = "save";
+    container.appendChild(button);
+
+    icon = document.createElement("i");
+    icon.setAttribute("class", "fas fa-save");
+    icon.ariaHidden = "true";
+    button.appendChild(icon);
+  } else if (hour[i] > currentTime) {
+    container = document.createElement("div");
+    container.setAttribute("class", "row time-block future");
+    mainDiv.appendChild(container);
+
+    time = document.createElement("div");
+    time.setAttribute("class", "col-2 col-md-1 hour text-center py-3");
+    time.innerHTML = hour[i];
+    container.appendChild(time);
+
+    text = document.createElement("textarea");
+    text.setAttribute("class", "col-8 col-md-10 description");
+    text.rows = "3";
+    container.appendChild(text);
+
+    button = document.createElement("button");
+    button.setAttribute("class", "btn saveBtn col-2 col-md-1");
+    button.ariaLabel = "save";
+    container.appendChild(button);
+
+    icon = document.createElement("i");
+    icon.setAttribute("class", "fas fa-save");
+    icon.ariaHidden = "true";
+    button.appendChild(icon);
+  }
+}
+
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
