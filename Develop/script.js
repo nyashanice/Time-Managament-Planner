@@ -3,9 +3,9 @@ let time;
 let text;
 let button;
 let icon;
-// let saveButton = document.getElementsByTagName("button");
 let saveButton = $("button");
 let mainDiv = $("#mainDiv");
+
 // display current day on page
 let currentDay = $("#currentDay");
 currentDay.text(dayjs().format("dddd, MMM DD"));
@@ -23,15 +23,11 @@ let hour = [
   "14:00",
   "15:00",
   "16:00",
-  "20:00",
+  "17:00",
 ];
 
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 $(function () {
-  // TODO: Add code to apply the past, present, or future class to each time
-  // compares current time to hour array and sets HTML accordingly
+  // sets HTML elements for each hour
   for (i = 0; i < hour.length; i++) {
     container = $("<div>");
     container.attr("id", hour[i]);
@@ -57,6 +53,7 @@ $(function () {
     icon.ariaHidden = "true";
     button.append(icon);
 
+    // assigns correct class name by comparing current time
     if (hour[i] == currentTime) {
       container.addClass("row time-block present");
     } else if (hour[i] < currentTime) {
@@ -66,6 +63,7 @@ $(function () {
     }
   }
 
+  // save user input to local storage on save button click
   $("button").click(function () {
     localStorage.setItem(
       $(this).parent().attr("id"),
